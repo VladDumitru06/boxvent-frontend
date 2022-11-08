@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import FighterList from '../components/FighterList';
+import FighterAPI from "../apis/FighterAPI";
 function FighterPage(){
 
-    const [fighters, setFighters] = useState();
+    const [fighters, setFighters] = useState([]);
     let fightersExist = false;
     const fetchFighters = async () => {  
-        const fighters = await axios(
-            'http://localhost:8080/fighters',
-          );
-          const nameObject = fighters.data.fighters;
-         setFighters(nameObject);
+        FighterAPI.getFighters()
+                    .then(response =>{
+                        setFighters(response.data.fighters);
+                    })
         
     }
     if(fighters)

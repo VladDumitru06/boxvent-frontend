@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
+import FighterAPI from "../apis/FighterAPI";
 
 function InputFighter(){
 
-    const dummyFighter = {
-        name: "Vlad the Boxer",
-        record: " 10-40-0"
-    };
 
-    const [fighterData, setFighter] = useState(dummyFighter);
+    const [fighterData, setFighter] = useState();
 
     const handleNameChange = event => {
         setFighter(fighterData => ({
@@ -17,21 +13,34 @@ function InputFighter(){
          }));
       }
 
-    const handleRecordChange = event => {
-        setFighter(fighterData => ({
-            ...fighterData,
-            record: event.target.value
-         }));
-      }
+      const handleWinsChange = event => {
+          setFighter(fighterData => ({
+              ...fighterData,
+              wins: event.target.value
+           }));
+        }
+
+        const handleDrawsChange = event => {
+            setFighter(fighterData => ({
+                ...fighterData,
+                draws: event.target.value
+             }));
+          }
+
+          const handleLosesChange = event => {
+              setFighter(fighterData => ({
+                  ...fighterData,
+                  loses: event.target.value
+               }));
+            }
     const handleSubmit = e => {
 
         e.preventDefault();
-
-        axios.post(`http://localhost:8080/fighters`, fighterData )
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-      })
+        FighterAPI.createFighter(fighterData)
+        .then(response =>{
+            console.log(response);
+            console.log(response.data);
+        })
     }
     return (
         <form className="form-container"
@@ -39,14 +48,26 @@ function InputFighter(){
             <input
                 type="text"
                 className="input-text"
-                placeholder="Add item"
+                placeholder="Fighter Name"
                 onChange={handleNameChange}
             />
                         <input
                 type="text"
                 className="input-text"
-                placeholder="Add Record"
-                onChange={handleRecordChange}
+                placeholder="Wins"
+                onChange={handleWinsChange}
+            />
+                        <input
+                type="text"
+                className="input-text"
+                placeholder="Draws"
+                onChange={handleDrawsChange}
+            />
+                        <input
+                type="text"
+                className="input-text"
+                placeholder="Loses"
+                onChange={handleLosesChange}
             />
             <button className="input-submit">Submit</button>
         </form>
