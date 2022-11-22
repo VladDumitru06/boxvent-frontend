@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import FightersPage from './pages/FightersPage';
 import CreateFightersPage from './pages/CreateFightersPage';
 import NavBar from './components/NavBar';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/fighters" element={<FightersPage />} />
           <Route path="/createfighters" element={<CreateFightersPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </div>

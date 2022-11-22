@@ -17,6 +17,16 @@ function NavBar(){
             id: 3,
             path: "/createfighters",
             text: "Create Fighters"
+        },
+        {
+            id: 4,
+            path: "/register",
+            text: "Register"
+        },
+        {
+            id: 5,
+            path: "/login",
+            text: "Login"
         }
     ]
     return (

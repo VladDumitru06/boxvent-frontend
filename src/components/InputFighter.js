@@ -43,29 +43,25 @@ function InputFighter(){
         })
     }
     return (
-        <form className="form-container"
+        <form 
             onSubmit={handleSubmit}>
             <input
                 type="text"
-                className="input-text"
                 placeholder="Fighter Name"
                 onChange={handleNameChange}
             />
                         <input
                 type="text"
-                className="input-text"
                 placeholder="Wins"
                 onChange={handleWinsChange}
             />
                         <input
                 type="text"
-                className="input-text"
                 placeholder="Draws"
                 onChange={handleDrawsChange}
             />
                         <input
                 type="text"
-                className="input-text"
                 placeholder="Loses"
                 onChange={handleLosesChange}
             />
