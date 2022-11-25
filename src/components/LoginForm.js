@@ -1,7 +1,8 @@
 import { useState , useEffect } from "react";
 import UserAPI from "../apis/UserAPI";
+import AsyncLocalStorage from "../asyncLocalStorage/AsyncLocalStorage";
+import jwt_decode from "jwt-decode";
 function LoginForm (){
-    
     const[userData, setUserData] = useState();
 
     const handleUsernameChange = event =>{
@@ -20,9 +21,8 @@ function LoginForm (){
 
 
     const handleSubmit = e =>{
-       e.preventDefault();
+        e.preventDefault();
         UserAPI.loginUser(userData);
-
     } 
 
     

@@ -5,7 +5,7 @@ function RegistrationForm (){
     const[userData, setUserData] = useState();
     const[passwordChecker, setPasswordChecker] = useState("");
     const [reTypedPassword, setReTypedPassword] = useState("");
-    const [errors, setErrors] = useState();
+    
     const handleUsernameChange = event =>{
         setUserData(userData => ({
             ...userData,
