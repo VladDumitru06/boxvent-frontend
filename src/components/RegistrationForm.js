@@ -1,5 +1,7 @@
 import { useState , useEffect } from "react";
 import UserAPI from "../apis/UserAPI";
+import  Form  from "react-bootstrap/form";
+import Button from "react-bootstrap/button";
 function RegistrationForm (){
     
     const[userData, setUserData] = useState();
@@ -77,25 +79,29 @@ function RegistrationForm (){
         return errors;
     }
     return (
-        <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            placeholder="Username"
-            onChange={handleUsernameChange}
-        />
-                    <input
-            type="password"
-            placeholder="Password"
-            onChange={handlePasswordChange}
-        />
-                    <input
-            type="password"
-            placeholder="Re-type Password"
-            onChange={handleReTypePasswordChange}
-        />
-        <p>{passwordChecker}</p>
-        <input type="submit" value="Register" />
-    </form>
+        <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Username</Form.Label>
+                <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter username" />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" />
+        </Form.Group>
+        
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>ReType-Password</Form.Label>
+            <Form.Control onChange={handleReTypePasswordChange} type="password" placeholder="ReType-Password" />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        </Form.Group>
+        <Button variant="primary" type="submit">
+            Register
+        </Button>
+        </Form>
+
     )
 }
 export default RegistrationForm;

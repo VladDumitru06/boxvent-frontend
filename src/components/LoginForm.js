@@ -1,7 +1,10 @@
 import { useState , useEffect } from "react";
 import UserAPI from "../apis/UserAPI";
-import AsyncLocalStorage from "../asyncLocalStorage/AsyncLocalStorage";
-import jwt_decode from "jwt-decode";
+import  Form  from "react-bootstrap/form";
+import Button from "react-bootstrap/button";
+import Notification from "./Notification";
+import { ToastContainer } from "react-toastify";
+
 function LoginForm (){
     const[userData, setUserData] = useState();
 
@@ -22,24 +25,29 @@ function LoginForm (){
 
     const handleSubmit = e =>{
         e.preventDefault();
-        UserAPI.loginUser(userData);
+        UserAPI.loginUser(userData).then(response => {
+            console.log(response);
+            console.log(response.data);
+            Notification.Success("Fighter logged in");
+        })
     } 
-
-    
     return (
-        <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            placeholder="Username"
-            onChange={handleUsernameChange}
-        />
-                    <input
-            type="password"
-            placeholder="Password"
-            onChange={handlePasswordChange}
-        />
-        <input type="submit" value="Login" />
-    </form>
+                <Form onSubmit={handleSubmit}>
+                    <ToastContainer/>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Username</Form.Label>
+                        <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter email" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Login
+                </Button>
+                </Form>
     )
 }
 export default LoginForm;
