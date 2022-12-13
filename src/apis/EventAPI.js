@@ -12,7 +12,8 @@ const EventAPI = {
         }),
     createEvent: newEvent => axios.post(`${BASE_URL}/events`, newEvent, config)
         .catch(err => {
-            console.log(err);
+            console.log(err.response.data);
+            throw err.response.data;
         })
 
 };

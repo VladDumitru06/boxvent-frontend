@@ -1,6 +1,6 @@
 import { Row , Col, Container } from "react-bootstrap";
 import FightersPage from "./FightersPage";
-import MainContent from "../components/MainContent";
+import MainContent from "../components/ImageCarousel";
 import { useRef } from "react";
 import EventsPage from "./EventsPage";
 

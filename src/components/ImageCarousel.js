@@ -3,9 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import MainImage from "../Images/MainPage.jpg"
 import MainImage2 from "../Images/MainPage2.jpg"
 import MainImage3 from "../Images/MainPage3.jpg"
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
 
 function MainContent() {
   const [index, setIndex] = useState(0);

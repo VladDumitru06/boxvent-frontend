@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FighterList from '../components/FighterList';
+import FighterList from '../components/Fighter/FighterList';
 import FighterAPI from "../apis/FighterAPI";
 function FighterPage(){
 

@@ -4,9 +4,10 @@ import HomePage from './pages/HomePage';
 import FightersPage from './pages/FightersPage';
 import CreateFightersPage from './pages/CreateFightersPage';
 import NavBar from './components/NavBar';
-import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CreateEventsPage from './pages/CreateEventsPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/fighters" element={<FightersPage />} />
           <Route path="/fighters/create" element={<CreateFightersPage />} />
+          <Route path="/events/create" element={<CreateEventsPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </Router>
     </div>

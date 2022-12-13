@@ -4,6 +4,7 @@ import  Form  from "react-bootstrap/form";
 import Button from "react-bootstrap/button";
 import Notification from "./Notification";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm (){
     const[userData, setUserData] = useState();
@@ -23,12 +24,15 @@ function LoginForm (){
     }  
 
 
+    let navigate = useNavigate(); 
     const handleSubmit = e =>{
         e.preventDefault();
         UserAPI.loginUser(userData).then(response => {
             console.log(response);
             console.log(response.data);
-            Notification.Success("Fighter logged in");
+            Notification.Success("Succesfully logged in");
+              navigate("/"      );
+              window.location.reload();
         })
     } 
     return (

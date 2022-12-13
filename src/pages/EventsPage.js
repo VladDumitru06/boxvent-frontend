@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EventAPI from "../apis/EventAPI";
-import EventList from "../components/EventList";
+import EventList from "../components/Event/EventList";
 import Notification from "../components/Notification"
 function EventsPage(){
 
@@ -9,7 +9,6 @@ function EventsPage(){
     const fetchEvents = async () => {  
         EventAPI.getEvents()
                     .then(response =>{
-                        console.log(response.data.events);
                         setEvents(response.data.events);
                     })
         
