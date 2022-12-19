@@ -17,7 +17,7 @@ function NavBar() {
             id: 1,
             path: "/fighters",
             text: "Fighters",
-            roles: ["CLIENT", "ADMIN"]
+            roles: ["CLIENT", "ADMIN" , "GUEST"]
         },
         {
             id: 2,
@@ -35,13 +35,13 @@ function NavBar() {
             id: 4,
             path: "/login",
             text: "Login",
-            roles: ["CLIENT", "ADMIN"]
+            roles: ["CLIENT", "ADMIN", "GUEST"]
         },
         {
             id: 5,
             path: "/register",
             text: "Register",
-            roles: ["CLIENT", "ADMIN"]
+            roles: ["CLIENT", "ADMIN" , "GUEST"]
         },
     ]
 
