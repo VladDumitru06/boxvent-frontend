@@ -31,20 +31,20 @@ function LoginForm (){
             console.log(response);
             console.log(response.data);
             Notification.Success("Succesfully logged in");
-              navigate("/"      );
+              navigate("/");
               window.location.reload();
         })
     } 
     return (
                 <Form onSubmit={handleSubmit}>
                     <ToastContainer/>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
-                        <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter email" />
+                        <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter username" required/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" />
+                    <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" required/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 </Form.Group>

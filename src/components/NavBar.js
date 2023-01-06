@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import logo from "../Images/logo.png"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -43,6 +43,12 @@ function NavBar() {
             text: "Register",
             roles: ["CLIENT", "ADMIN" , "GUEST"]
         },
+        {
+            id: 6,
+            path: "/logout",
+            text: "Logout",
+            roles: ["CLIENT", "ADMIN"]
+        },
     ]
 
     return (
@@ -53,13 +59,10 @@ function NavBar() {
                 ref={navbarRef}
                 className="nav-transition"
                 style={navbarStyles}
-                onMouseEnter={() => { setBgColor("dark"); setTextColor("text-white");}}
+                onMouseEnter={() => { setBgColor("dark"); setTextColor("text-white"); }}
                 onMouseLeave={() => { setBgColor("transparent"); setTextColor("text-dark"); }}
                 bg={bgColor}
                 expand="lg"
-                onClick={(event) => {
-                    console.log(`Navbar className: ${navbarRef.current.className}`);
-                }}
             >
 
                 <Container>
@@ -70,13 +73,12 @@ function NavBar() {
                             {pages.map(page => {
                                 if (GetRole().roles.some(UserRole => page.roles.includes(UserRole))) {
                                     return (
-                                        <div key={page.id}>
-                                            {<Nav.Link className={textColor} href={page.path}>
-                                                {page.text}
-                                            </Nav.Link>}
-                                        </div>
+                                        <Nav.Link key={page.id} className={textColor} href={page.path}>
+                                            {page.text}
+                                        </Nav.Link>
                                     )
                                 }
+                                return <></>
                             })}
                         </Nav>
                     </Navbar.Collapse>

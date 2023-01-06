@@ -21,6 +21,7 @@ function App() {
           <Route path="/events/create" element={<CreateEventsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/logout" element={<LoginPage />} />
         </Routes>
       </Router>
     </div>

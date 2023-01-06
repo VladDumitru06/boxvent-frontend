@@ -8,6 +8,7 @@ function FighterPage(){
     const fetchFighters = async () => {  
         FighterAPI.getFighters()
                     .then(response =>{
+                        if(response)
                         setFighters(response.data.fighters);
                     })
         
