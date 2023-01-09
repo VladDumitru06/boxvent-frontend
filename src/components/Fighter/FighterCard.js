@@ -1,11 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ImageAPI from '../../apis/ImageAPI';
 import styles from './FighterCard.module.css'
 function FighterCard(props){
+  const [imgUrl, setImgUrl] = useState(null);
+  const jwtToken = 
+  useEffect(() => {
+    async function fetchImage() {
+      const response = await fetch(`http://localhost:8080/fighters/${props.fighter.name}/profilePic`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("JWT")}`
+        }
+      });
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        setImgUrl(url);
+      } else {
+        console.error('Failed to fetch image');
+      }
+    }
+    fetchImage();
+  }, []);
 return (
 <div className={styles.flipcard}>
     <div className={styles.flipcardinner}>
     <div className={styles.flipcardfront}>
-      <img className={styles.cardavatar} src="https://talksport.com/wp-content/uploads/sites/5/2022/08/RTRMADP_BOXING-KSI-WASSABI-PREVIEW_1053569507_UP1EI881AO0LS_2022-08-08T164802Zjpg-JS752386935.jpg?strip=all&quality=100&w=1920&h=1080&crop=1"
+      <img className={styles.cardavatar} src={imgUrl}
        alt="Avatar"/>
     </div>
     <div className={styles.flipcardback}>

@@ -19,7 +19,6 @@ function EventCard(props) {
     try {
       const response = await FightCardAPI.getFightCardsByEvent(eventId);
       setLocalFightCards(response.data.fightCards);
-      console.log(response.data.fightCards);
     } catch (error) {
       console.log(error);
     }
