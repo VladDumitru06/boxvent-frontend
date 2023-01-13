@@ -11,7 +11,7 @@ function Event(props) {
                             <Card.Body>
                                 <Card.Title>{props.event.name}</Card.Title>
                                 <Card.Text>
-                                    Come watch {props.event.name} live!
+                                    {props.event.description}
                                     <h4>Fight Cards</h4>
                                     {props.localFightCards.map((fightCard) => (
                                         <div key={fightCard.id}>

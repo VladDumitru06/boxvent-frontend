@@ -8,6 +8,8 @@ import LoginPage from './pages/LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateEventsPage from './pages/CreateEventsPage';
 import RegisterPage from './pages/RegisterPage';
+import EventsPage from './pages/EventsPage';
+import Tickets from './components/Tickets/Tickets';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/tickets" element={<Tickets />} />
           <Route path="/fighters" element={<FightersPage />} />
           <Route path="/fighters/create" element={<CreateFightersPage />} />
           <Route path="/events/create" element={<CreateEventsPage />} />

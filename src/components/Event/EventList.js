@@ -9,7 +9,7 @@ function EventList(props){
       <Row xs={1}sm={2} md={2} lg={3} xl={3}xxl={4} className="justify-content-md-center">
             
       {props.events?.map(event => (
-            <Col key={event.id} className="pt-5"><EventCard  event={event}/></Col>
+            <Col key={event.id} className="pt-5"><EventCard  event={event} Notification={props.Notification}/></Col>
           ))}
     </Row>
     </Container>

@@ -10,11 +10,14 @@ import ChatWindow from '../Chat/ChatWindow';
 import LoginForm from '../LoginForm';
 import useHistory from 'react-router-dom';
 import Event from './Event';
+import Tickets from './Tickets';
+import { Col, Container, Row } from 'react-bootstrap';
+import isUserLoggedIn from '../IsUserLoggedIn';
 function EventCard(props) {
 
   const [localFightCards, setLocalFightCards] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpenMoreInfo, setIsOpenMoreInfo] = useState(false);
+  const [isOpenTickets, setIsOpenTickets] = useState(false);
   const fetchFightCards = async (eventId) => {
     try {
       const response = await FightCardAPI.getFightCardsByEvent(eventId);
@@ -39,19 +42,42 @@ function EventCard(props) {
         <Card.Text>
           Date: {props.event.date}
         </Card.Text>
-        <div style={isOpen ? { width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, zIndex: 1 } : {}}>
+        <Container>
+          <Row>
+            <Col>
+        <Button variant="primary" onClick={() => setIsOpenMoreInfo(!isOpenMoreInfo)}>More Info</Button>
+        </Col>
+        <Col>
+        <Button variant="primary" onClick={() => setIsOpenTickets(!isOpenTickets)}>Tickets</Button>
+        </Col>
+        </Row>
+        </Container>
+        <div style={isOpenMoreInfo ? { width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, zIndex: 1 } : {}}>
           <Popup
-            trigger={(open) => (
-              <Button variant={open ? "none" : "primary"} >{open ? '' : 'More Info'}</Button>
-            )}
-            onOpen={() => setIsOpen(true)}
-            onClose={() => setIsOpen(false)}
+            open={isOpenMoreInfo}
+            onOpen={() => setIsOpenMoreInfo(true)}
+            onClose={() => setIsOpenMoreInfo(false)}
             modal
             closeOnDocumentClick
           >
             <span><Event event={props.event} localFightCards={localFightCards} />  </span>
           </Popup>
         </div>
+        <div>
+
+          <div style={isOpenTickets ? { width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, zIndex: 1 } : {}}>
+            <Popup
+              open={isOpenTickets}
+              onOpen={() => setIsOpenTickets(true)}
+              onClose={() => setIsOpenTickets(false)}
+              modal
+              closeOnDocumentClick
+            >
+              <span>{isUserLoggedIn() && <Tickets event={props.event} Notification={props.Notification}/>}  </span>
+            </Popup>
+          </div>
+        </div>
+
       </Card.Body>
     </Card>
   );

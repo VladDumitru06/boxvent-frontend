@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import EventAPI from "../apis/EventAPI";
 import EventList from "../components/Event/EventList";
 import Notification from "../components/Notification"
-function EventsPage(){
+function EventsPage(props){
 
     const [events, setEvents] = useState([]);
     let eventsExist = false;
@@ -31,7 +32,10 @@ function EventsPage(){
 
     function ShowEvents(){
         return(
-            <EventList events={events}/>
+            <>
+            <ToastContainer/>
+            <EventList events={events} Notification={props.Notification}/>
+            </>
         )
     }
     function NoEvents(){

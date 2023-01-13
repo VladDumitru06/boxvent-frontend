@@ -3,14 +3,11 @@ import ImageAPI from '../../apis/ImageAPI';
 import styles from './FighterCard.module.css'
 function FighterCard(props){
   const [imgUrl, setImgUrl] = useState(null);
-  const jwtToken = 
+  
+
   useEffect(() => {
     async function fetchImage() {
-      const response = await fetch(`http://localhost:8080/fighters/${props.fighter.name}/profilePic`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem("JWT")}`
-        }
-      });
+      const response = await ImageAPI(props);
       if (response.ok) {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);

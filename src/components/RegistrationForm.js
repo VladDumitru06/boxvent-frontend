@@ -14,6 +14,12 @@ function RegistrationForm (){
             username: event.target.value
         }));
     }    
+    const handleEmailChange = event =>{
+        setUserData(userData => ({
+            ...userData,
+            email: event.target.value
+        }));
+    }   
 
     const handlePasswordChange = event =>{
         setUserData(userData => ({
@@ -80,19 +86,22 @@ function RegistrationForm (){
     }
     return (
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
-                <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter username" />
+                <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter username" required />
         </Form.Group>
-
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+                <Form.Control onChange={handleEmailChange} type="email" placeholder="Enter email" required />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" />
+            <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" required />
         </Form.Group>
         
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicReTypePassword">
             <Form.Label>ReType-Password</Form.Label>
-            <Form.Control onChange={handleReTypePasswordChange} type="password" placeholder="ReType-Password" />
+            <Form.Control onChange={handleReTypePasswordChange} type="password" placeholder="ReType-Password" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicCheckbox">

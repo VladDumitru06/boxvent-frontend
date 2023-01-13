@@ -17,34 +17,46 @@ function NavBar() {
             id: 1,
             path: "/fighters",
             text: "Fighters",
-            roles: ["CLIENT", "ADMIN" , "GUEST"]
+            roles: ["CLIENT", "ADMIN", "GUEST"]
         },
         {
             id: 2,
+            path: "/events",
+            text: "Events",
+            roles: ["CLIENT", "ADMIN", "GUEST"]
+        },
+        {
+            id: 3,
             path: "/fighters/create",
             text: "Create Fighters",
             roles: ["ADMIN"]
         },
         {
-            id: 3,
+            id: 4,
             path: "/events/create",
             text: "Create Events",
             roles: ["ADMIN"]
         },
         {
-            id: 4,
+            id: 5,
+            path: "/tickets",
+            text: "Tickets",
+            roles: ["CLIENT", "ADMIN"]
+        },
+        {
+            id: 6,
             path: "/login",
             text: "Login",
             roles: ["CLIENT", "ADMIN", "GUEST"]
         },
         {
-            id: 5,
+            id: 7,
             path: "/register",
             text: "Register",
-            roles: ["CLIENT", "ADMIN" , "GUEST"]
+            roles: ["CLIENT", "ADMIN", "GUEST"]
         },
         {
-            id: 6,
+            id: 8,
             path: "/logout",
             text: "Logout",
             roles: ["CLIENT", "ADMIN"]
