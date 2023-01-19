@@ -19,6 +19,14 @@ const FighterAPI = {
         .catch(err => {
             Notification.Error(""+err);
             console.log(err);
+        }),
+    updateFighter: (id, updatedFighter) => axios.put(`${BASE_URL}/fighters/${id}`, updatedFighter, config)
+        .catch(err => {
+            console.log(err);
+        }),
+    deleteFighter: id => axios.delete(`${BASE_URL}/fighters/${id}`, config)
+        .catch(err => {
+            console.log(err);
         })
 
 };

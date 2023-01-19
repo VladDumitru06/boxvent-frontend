@@ -18,6 +18,12 @@ function CreateFightCard(props) {
     }
     useEffect(() => {
         fetchFighters();
+        return () => {
+            if(fightCard)
+            {
+                props.removeFight(props.order);
+            }
+        }
     }, []);
 
     useEffect(() => {

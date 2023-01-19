@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, InputGroup } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import EventAPI from "../apis/EventAPI";
 import EventList from "../components/Event/EventList";
@@ -6,7 +7,11 @@ import Notification from "../components/Notification"
 function EventsPage(props){
 
     const [events, setEvents] = useState([]);
+    const [tempEvents, setTempEvents] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [shouldFocus, setShouldFocus] = useState(false);
     let eventsExist = false;
+ 
     const fetchEvents = async () => {  
         EventAPI.getEvents()
                     .then(response =>{
@@ -14,6 +19,13 @@ function EventsPage(props){
                     })
         
     }
+    const filteredEvents = events.filter(event => 
+        event.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    useEffect(() => {
+        fetchEvents();
+    }, [tempEvents]);
     if(events)
     {
         if(!(Object.keys(events).length === 0))
@@ -25,16 +37,28 @@ function EventsPage(props){
     {
            eventsExist = false;
     }
-    useEffect(() => {
-        fetchEvents();
-    }, []);
-  
-
     function ShowEvents(){
         return(
             <>
             <ToastContainer/>
-            <EventList events={events} Notification={props.Notification}/>
+            <Form>
+            <Form.Group controlId="formSearch">
+                <Form.Label>Loses</Form.Label>
+                <Form.Control
+                autoFocus={shouldFocus}
+                                    type="text" 
+                                    placeholder="Search for events" 
+                                    value={searchTerm} 
+                                    onChange={e => {setSearchTerm(e.target.value);
+                                    setShouldFocus(true);
+                                    if (e.target.value === '') {
+                                        setShouldFocus(false);
+                                    }
+                                    } } />
+            </Form.Group>
+
+            <EventList events={filteredEvents} setEvents={(events) =>setTempEvents(events)}Notification={props.Notification}/>
+            </Form>
             </>
         )
     }
@@ -43,7 +67,7 @@ function EventsPage(props){
             <h1>No events currently registered</h1>
         )
     }
-    if(eventsExist){
+    if(events.length > 0){
         return <ShowEvents/>
     }
     else{
@@ -52,4 +76,3 @@ function EventsPage(props){
 
 }
 export default EventsPage;
-

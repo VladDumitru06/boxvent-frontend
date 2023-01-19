@@ -5,7 +5,7 @@ function isUserLoggedIn() {
         if(jwtDecode(jwt).exp < Date.now() / 1000) {
             return false;
         }
-        if(jwtDecode(jwt).roles.includes(!"ROLE_GUEST")) {
+        if(jwtDecode(jwt).roles.includes("GUEST")) {
             return false;
         }
         return true;

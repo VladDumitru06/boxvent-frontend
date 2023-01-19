@@ -12,10 +12,28 @@ function CreateEvent() {
     const [nrOfFightCards, setnrOfFightCards] = useState(0);
     const [dateTime, setDateTime] = useState("");
     const [city, setCity] = useState("");
-    const [ticketPrice, setTicketPrice] = useState("");
-    const [totalTickets, setTotalTickets] = useState("");
     const [fightCards, setFightCards] = useState([]);
-
+    const [imagePreview, setImagePreview] = useState();
+    const [image, setImage] = useState();
+    const [imageData, setImageData] = useState();
+  
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setImage(file);
+  
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageData(reader.result);
+        setImagePreview(reader.result);
+      }
+      reader.readAsDataURL(file);
+    }
+    useEffect(() => {
+        setEventData((prevEventData) => ({
+            ...prevEventData,
+          image: imageData,
+        }));
+      }, [imageData]);
     const handleChange = (event) => {
         const { name, value } = event.target;
         setEventData((prevEventData) => ({
@@ -27,7 +45,11 @@ function CreateEvent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(eventData);
+            if(fightCards.length === 0)
+            {
+                Notification.Error("You need to add at least one fight card");
+                return;
+            }
             setEventData((prevEventData) => ({
                 ...prevEventData,
                 fightCards: fightCards
@@ -36,13 +58,20 @@ function CreateEvent() {
             const response = await EventAPI.createEvent(eventData)
                 .catch(error => {
                     Notification.Error(error);
+                    return;
                 });
             if (response === null || response === undefined || response === "") {
 
-                Notification.Error("Something went wrong");
+                Notification.Error("No response from server");
             }
             else
+              {  
                 Notification.Success("Event created");
+                const form = document.getElementById("formId");
+                form.reset();
+                setImagePreview();
+                setnrOfFightCards(0);
+            }
         } catch (error) {
             Notification.Error(error);
         }
@@ -63,10 +92,6 @@ function CreateEvent() {
 
 
     useEffect(() => {
-
-        console.log(JSON.stringify(eventData));
-    }, [eventData]);
-    useEffect(() => {
         GetCities();
     }, []);
     const addFightCard = (newFightCard) => {
@@ -86,10 +111,17 @@ function CreateEvent() {
         setFightCards((prevFightCards) => ([...prevFightCards, newFightCard]));
         }
     }
+    const removeFightCard = (fightCard) => {
+        const updatedFightCards = fightCards.filter(f => f !== fightCard);
+        setFightCards(updatedFightCards);
+    }
     return (
         <>
-            <Form onSubmit={handleSubmit}>
-
+            <Form id="formId" onSubmit={handleSubmit}>
+        <Form.Label>Image</Form.Label>
+        <br></br>
+            <input required type="file" accept="image/jpeg,image/png" onChange={(e) => handleFileChange(e)} />
+            {imagePreview && <img src={imagePreview} alt="event thumbnail" width="200"/>}
                 <ToastContainer />
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Name</Form.Label>
@@ -99,6 +131,15 @@ function CreateEvent() {
                         onChange={handleChange}
                         type="text"
                         placeholder="Event Name" />
+                </Form.Group>
+                <Form.Group controlId="formBasicText">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        required
+                        name="description"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Event Description" />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select a city:</Form.Label>
@@ -162,12 +203,12 @@ function CreateEvent() {
                 <br />
                 <br />
                 {Array(nrOfFightCards).fill().map((_, index) => (
-                    <><div     style={{ 
+                    <div key={index}><div     style={{ 
                         backgroundColor: 'rgba(128, 128, 128, 0.25)',
                         borderRadius: '5px'
-                      }} className="p-1"><CreateFightCard  key={index} name="fightCard" setFights={addFightCard} order={index}/>
+                      }} className="p-1"><CreateFightCard name="fightCard" removeFight={removeFightCard} setFights={addFightCard} order={index}/>
                     </div>
-                    <br /></>
+                    <br /></div>
 
                 ))}
                 <Button variant="primary" type="submit">

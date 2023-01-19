@@ -9,7 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateEventsPage from './pages/CreateEventsPage';
 import RegisterPage from './pages/RegisterPage';
 import EventsPage from './pages/EventsPage';
-import Tickets from './components/Tickets/Tickets';
+import Tickets from './components/Tickets/TicketList';
+import Logout from './components/Logout';
+import Statistics from './components/Statistics';
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
           <Route path="/events/create" element={<CreateEventsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/logout" element={<LoginPage />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/statistics" element={<Statistics />} />
         </Routes>
       </Router>
     </div>

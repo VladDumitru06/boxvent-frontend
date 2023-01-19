@@ -2,6 +2,9 @@ import { useState , useEffect } from "react";
 import UserAPI from "../apis/UserAPI";
 import  Form  from "react-bootstrap/form";
 import Button from "react-bootstrap/button";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Notification from "./Notification";
 function RegistrationForm (){
     
     const[userData, setUserData] = useState();
@@ -33,14 +36,14 @@ function RegistrationForm (){
         checkSimilarPassword(userData.password,event.target.value);
         setReTypedPassword(event.target.value);
     } 
-
+    let navigate = useNavigate();
     const handleSubmit = e =>{
        e.preventDefault();
        if(checkInput(userData).length === 0){
-        UserAPI.registerUser(userData);
+        UserAPI.registerUser(userData).then(() =>{Notification.Success("Succesfully registered"); navigate("/login");});
        }
        else{
-        alert(checkInput(userData));
+        Notification.Error(checkInput(userData));
        }
     } 
 
@@ -86,6 +89,7 @@ function RegistrationForm (){
     }
     return (
         <Form onSubmit={handleSubmit}>
+            <ToastContainer/>
         <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
                 <Form.Control onChange={handleUsernameChange} type="text" placeholder="Enter username" required />

@@ -13,7 +13,7 @@ function Event(props) {
                                 <Card.Text>
                                     {props.event.description}
                                     <h4>Fight Cards</h4>
-                                    {props.localFightCards.map((fightCard) => (
+                                    {props.fightCards.map((fightCard) => (
                                         <div key={fightCard.id}>
                                             <b>{fightCard.fight.challengerFighter.name}</b> VS <b>{fightCard.fight.challengedFighter.name}</b>
                                         </div>

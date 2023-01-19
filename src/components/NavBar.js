@@ -61,6 +61,12 @@ function NavBar() {
             text: "Logout",
             roles: ["CLIENT", "ADMIN"]
         },
+        {
+            id: 9,
+            path: "/statistics",
+            text: "Statistics",
+            roles: [ "ADMIN"]
+        },
     ]
 
     return (
@@ -82,16 +88,11 @@ function NavBar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            {pages.map(page => {
-                                if (GetRole().roles.some(UserRole => page.roles.includes(UserRole))) {
-                                    return (
-                                        <Nav.Link key={page.id} className={textColor} href={page.path}>
-                                            {page.text}
-                                        </Nav.Link>
-                                    )
-                                }
-                                return <></>
-                            })}
+                            {pages.filter(page => GetRole().roles.some(UserRole => page.roles.includes(UserRole))).map((page, index) => (
+                                <Nav.Link key={index} className={textColor} href={page.path}>
+                                    {page.text}
+                                </Nav.Link>
+                            ))}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

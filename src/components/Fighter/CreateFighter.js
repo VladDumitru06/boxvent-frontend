@@ -16,7 +16,7 @@ function CreateFighter() {
     const reader = new FileReader();
     reader.onload = () => {
       setImageData(reader.result);
-
+      setImagePreview(reader.result);
     }
     reader.readAsDataURL(file);
   }
@@ -43,7 +43,10 @@ function CreateFighter() {
       console.log(response);
       console.log(response.data);
       Notification.Success("Fighter created!");
-  
+      const form = document.getElementById("formId");
+      form.reset();
+      setImagePreview();
+
     } catch (error) {
       Notification.Error(error);
     }
@@ -51,15 +54,17 @@ function CreateFighter() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form id="formId" onSubmit={handleSubmit}>
         <ToastContainer />
+        <Form.Label>Image</Form.Label>
+        <br></br>
         <input required type="file" accept="image/jpeg,image/png" onChange={(e) => handleFileChange(e)} />
-        <img src={imagePreview} />
+        {imagePreview && <img src={imagePreview} alt="fighter thumbnail" width="200" />}
 
         <Form.Group controlId="formBasicText">
           <Form.Label>Name</Form.Label>
           <Form.Control
-          required
+            required
             name="name"
             onChange={handleChange}
             type="text"
@@ -69,7 +74,7 @@ function CreateFighter() {
         <Form.Group controlId="formBasicText">
           <Form.Label>Wins</Form.Label>
           <Form.Control
-          required
+            required
             name="wins"
             onChange={handleChange}
             type="number"
@@ -79,7 +84,7 @@ function CreateFighter() {
         <Form.Group controlId="formBasicText">
           <Form.Label>Draws</Form.Label>
           <Form.Control
-          required
+            required
             name="draws"
             onChange={handleChange}
             type="number"
@@ -89,7 +94,7 @@ function CreateFighter() {
         <Form.Group controlId="formBasicText">
           <Form.Label>Loses</Form.Label>
           <Form.Control
-          required
+            required
             name="loses"
             onChange={handleChange}
             type="number"
