@@ -1,7 +1,7 @@
 import { useState , useEffect } from "react";
 import UserAPI from "../apis/UserAPI";
-import  Form  from "react-bootstrap/form";
-import Button from "react-bootstrap/button";
+import { Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Notification from "./Notification";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
