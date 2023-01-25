@@ -1,6 +1,6 @@
 # BoxVent frontend
 
-Website made for semester 3 front end
+Front end of boxing event website
 
 ## Getting started
 
