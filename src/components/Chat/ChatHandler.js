@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import GetRole from '../GetRole';
 import ChatMessagesPlaceholder from './ChatMessagesPlaceHolder';
 import SendMessagePlaceholder from './SendMessagePlaceholder';
-const ENDPOINT = "http://https://boxvent-backend.herokuapp.com/ws";
+const ENDPOINT = "https://boxvent-backend.herokuapp.com/ws";
 
 function ChatHandler(props) {
 
