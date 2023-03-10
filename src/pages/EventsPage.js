@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import EventAPI from "../apis/EventAPI";
 import EventList from "../components/Event/EventList";
@@ -42,8 +42,10 @@ function EventsPage(props){
             <>
             <ToastContainer/>
             <Form>
-            <Form.Group controlId="formSearch">
-                <Form.Label>Loses</Form.Label>
+            <Container>
+      <Row className="justify-content-md-center">
+  
+        <Col md="auto"> <Form.Group  controlId="formSearch">
                 <Form.Control
                 autoFocus={shouldFocus}
                                     type="text" 
@@ -55,7 +57,12 @@ function EventsPage(props){
                                         setShouldFocus(false);
                                     }
                                     } } />
-            </Form.Group>
+            </Form.Group></Col>
+
+      </Row>
+
+    </Container>
+           
 
             <EventList events={filteredEvents} setEvents={(events) =>setTempEvents(events)}Notification={props.Notification}/>
             </Form>

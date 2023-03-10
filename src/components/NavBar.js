@@ -47,25 +47,19 @@ function NavBar() {
             id: 6,
             path: "/login",
             text: "Login",
-            roles: ["CLIENT", "ADMIN", "GUEST"]
+            roles: ["GUEST"]
         },
         {
             id: 7,
             path: "/register",
             text: "Register",
-            roles: ["CLIENT", "ADMIN", "GUEST"]
-        },
-        {
-            id: 8,
-            path: "/logout",
-            text: "Logout",
-            roles: ["CLIENT", "ADMIN"]
+            roles: ["GUEST"]
         },
         {
             id: 9,
             path: "/statistics",
             text: "Statistics",
-            roles: [ "ADMIN"]
+            roles: ["ADMIN"]
         },
     ]
 
@@ -93,6 +87,12 @@ function NavBar() {
                                     {page.text}
                                 </Nav.Link>
                             ))}
+                        </Nav>
+                        <Nav>
+                            {GetRole().roles.includes("CLIENT") || GetRole().roles.includes("ADMIN") ? (
+                                <Nav.Link className={textColor} href="/logout">Logout</Nav.Link>
+                            ) : null}
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

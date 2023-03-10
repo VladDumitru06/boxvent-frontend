@@ -1,7 +1,7 @@
 import axios from "axios";
 import Notification from "../components/Notification";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://boxvent-backend.herokuapp.com";
 
 const UserAPI = {
     loginUser:  User =>  axios.post(`${BASE_URL}/login`, User)
