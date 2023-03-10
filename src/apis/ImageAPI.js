@@ -1,6 +1,4 @@
-import axios from "axios";
 
-const BASE_URL = "https://boxvent-backend.herokuapp.com";
 
 const config = {
   headers: {},

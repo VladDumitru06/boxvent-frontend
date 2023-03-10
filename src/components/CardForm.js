@@ -3,10 +3,6 @@ import { Form, FormControl, FormGroup, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CardForm(props) {
-  const [cardNumber, setCardNumber] = useState('');
-  const [nameOfCard, setNameOfCard] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
-  const [cvc, setCvc] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +17,6 @@ function CardForm(props) {
     if(cardNumber.Length === 3  || cardNumber.Length === 8 || cardNumber.Length === 13){
       cardNumber += "-";
     }
-    setCardNumber(cardNumber);
 
   }
 

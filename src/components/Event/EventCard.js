@@ -10,7 +10,6 @@ import { Col, Container, Row, ToastContainer } from 'react-bootstrap';
 import isUserLoggedIn from '../IsUserLoggedIn';
 import ImageAPI from '../../apis/ImageAPI';
 import Notification from '../Notification';
-import jwtDecode from 'jwt-decode';
 import GetRole from '../GetRole';
 import EditEvent from './EditEvent';
 import EventAPI from '../../apis/EventAPI';

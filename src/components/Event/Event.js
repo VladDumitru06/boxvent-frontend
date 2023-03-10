@@ -1,6 +1,5 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import ChatHandler from "../Chat/ChatHandler";
-import ChatWindow from "../Chat/ChatWindow";
 function Event(props) {
     return (
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import CityAPI from "../../apis/CityAPI";
 import EventAPI from "../../apis/EventAPI";
 import ImageAPI from "../../apis/ImageAPI";

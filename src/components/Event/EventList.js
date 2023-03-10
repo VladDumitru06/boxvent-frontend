@@ -3,9 +3,7 @@ import EventCard from './EventCard'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ImageAPI from "../../apis/ImageAPI";
 function EventList(props){
-  const [newImg, setNewImg] = React.useState(null);
   function modifyEvent(event, newEvent){
 
     const index = props.events.findIndex(e => e.id === event.id);

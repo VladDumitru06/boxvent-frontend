@@ -4,7 +4,6 @@ import Stomp from 'stompjs';
 import { v4 as uuidv4 } from 'uuid';
 import GetRole from '../GetRole';
 import ChatMessagesPlaceholder from './ChatMessagesPlaceHolder';
-import ChatWindow from './ChatWindow';
 import SendMessagePlaceholder from './SendMessagePlaceholder';
 const ENDPOINT = "http://localhost:8080/ws";
 

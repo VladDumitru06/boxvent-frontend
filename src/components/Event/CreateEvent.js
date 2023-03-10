@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EventAPI from '../../apis/EventAPI';
 import CityAPI from '../../apis/CityAPI';
-import { Form, InputGroup, InputGroupAppend, InputGroupText } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import Notification from '../../components/Notification';
 import { Button } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
