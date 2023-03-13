@@ -78,7 +78,7 @@ function EventsPage(props){
     function NoEvents(){
         return(
             <div>
-            {isLoading ? `${process.env.PUBLIC_URL}/assets/loadingpage.gif}` : <h1>Loading...</h1>}
+            {isLoading ? `${process.env.PUBLIC_URL}/assets/loadingpage.gif}` : <h1>No events registered</h1>}
             </div>
         )
     }

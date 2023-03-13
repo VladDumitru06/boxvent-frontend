@@ -6,7 +6,7 @@ const GetRole = function () {
      if (localStorage.getItem("JWT") !== null) {
           decoded = jwtDecode(localStorage.getItem("JWT"));
      }
-     if (localStorage.getItem("JWT") === null || decoded.exp < currentTime) {
+     if (localStorage.hasOwnProperty("JWT") || decoded.exp < currentTime) {
           var guest = {
                sub: "guest",
                roles: ["GUEST"]
