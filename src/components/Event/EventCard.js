@@ -52,7 +52,7 @@ function EventCard(props) {
         setImgUrl(url);
       } else {
         console.error('Failed to fetch image');
-        setImgUrl(`${process.env.PUBLIC_URL}/assets/NoIMG.png`);
+        setImgUrl(`${process.env.PUBLIC_URL}/assets/NoImg.png`);
       }
       setIsLoading(false);
     }
@@ -68,7 +68,7 @@ function EventCard(props) {
     <div>
     <Card style={{ width: '18rem' }}>
       <ToastContainer />
-      <Card.Img variant="top" src={isLoading ? `${process.env.PUBLIC_URL}/assets/loading.gif` : imgUrl} />
+      <Card.Img variant="top" src={isLoading ? `${process.env.PUBLIC_URL}/assets/Loading.gif` : imgUrl} />
       <Card.Body >
         <Card.Title>{props.event.name}</Card.Title>
         <Card.Text>

@@ -22,7 +22,7 @@ function FighterCard(props) {
       setImgUrl(url);
     } else {
       console.error('Failed to fetch image');
-      setImgUrl(`${process.env.PUBLIC_URL}/assets/NoIMG.png`);
+      setImgUrl(`${process.env.PUBLIC_URL}/assets/NoImg.png`);
     }
     setIsLoading(false);
   }
@@ -36,7 +36,7 @@ function FighterCard(props) {
       <ToastContainer />
       <div className={styles.flipcardinner}>
         <div className={styles.flipcardfront}>
-          <img className={styles.cardavatar} src={isLoading ? `${process.env.PUBLIC_URL}/assets/loading.gif` : imgUrl}
+          <img className={styles.cardavatar} src={isLoading ? `${process.env.PUBLIC_URL}/assets/Loading.gif` : imgUrl}
             alt="Avatar" />
         </div>
         <div className={styles.flipcardback}>

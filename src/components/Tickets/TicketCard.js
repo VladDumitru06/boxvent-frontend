@@ -16,7 +16,7 @@ function TicketCard(props) {
                 const url = URL.createObjectURL(blob);
                 setImgUrl(url);
             } else {
-                setImgUrl(`${process.env.PUBLIC_URL}/assets/NoIMG.png}`)
+                setImgUrl(`${process.env.PUBLIC_URL}/assets/NoImg.png}`)
                 console.error('Failed to fetch image');
             }
             setIsLoading(false);
@@ -34,7 +34,7 @@ function TicketCard(props) {
     return (
         <Card>
             <Card.Body>
-                <Card.Img variant="top" src={isLoading ? `${process.env.PUBLIC_URL}/assets/loading.gif` : imgUrl}/>
+                <Card.Img variant="top" src={isLoading ? `${process.env.PUBLIC_URL}/assets/Loading.gif` : imgUrl}/>
                 <Card.Title>{props.event.name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{props.event.description}</Card.Subtitle>
                 <Card.Text>

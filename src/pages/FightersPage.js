@@ -27,7 +27,7 @@ function FighterPage() {
     return (
       <div>
         <img
-          src={`${process.env.PUBLIC_URL}/assets/loadingpage.gif`}
+          src={`${process.env.PUBLIC_URL}/assets/LoadingPage.gif`}
           alt="Loading"
         />
       </div>
