@@ -3,10 +3,10 @@ import jwtDecode from "jwt-decode";
 const GetRole = function () {
      var currentTime = new Date().getTime() / 1000;
      var decoded;
-     if (localStorage.getItem("JWT") !== null) {
+     if (localStorage.hasOwnProperty("JWT")) {
           decoded = jwtDecode(localStorage.getItem("JWT"));
      }
-     if (localStorage.hasOwnProperty("JWT") || decoded.exp < currentTime) {
+     if (!localStorage.hasOwnProperty("JWT") || decoded.exp < currentTime) {
           var guest = {
                sub: "guest",
                roles: ["GUEST"]
