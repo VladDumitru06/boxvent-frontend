@@ -10,14 +10,20 @@ function EventsPage(props){
     const [tempEvents, setTempEvents] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [shouldFocus, setShouldFocus] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     let eventsExist = false;
  
     const fetchEvents = async () => {  
         EventAPI.getEvents()
                     .then(response =>{
                         setEvents(response.data.events);
+                        setIsLoading(false);
+                    }).catch(error => {
+                        console.log(error);
+                        setIsLoading(false);
+                    }).finally(() => {
+                        setIsLoading(false);
                     })
-        
     }
     const filteredEvents = events.filter(event => 
         event.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -71,7 +77,9 @@ function EventsPage(props){
     }
     function NoEvents(){
         return(
-            <h1>No events currently registered</h1>
+            <div>
+            {isLoading ? `${process.env.PUBLIC_URL}/assets/loadingpage.gif}` : <h1>Loading...</h1>}
+            </div>
         )
     }
     if(events.length > 0){

@@ -23,6 +23,7 @@ function EventCard(props) {
   const [imgUrl, setImgUrl] = useState(null);
   const [availableTickets, setAvailableTickets] = useState(props.event.available_tickets - props.event.sold_tickets);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const fetchFightCards = async (eventId) => {
     try {
       const response = await FightCardAPI.getFightCardsByEvent(eventId);
@@ -43,6 +44,7 @@ function EventCard(props) {
   }
   useEffect(() => {
     async function fetchImage() {
+      setIsLoading(true);
       const response = await ImageAPI.getEventImage(props);
       if (response.ok) {
         const blob = await response.blob();
@@ -50,7 +52,9 @@ function EventCard(props) {
         setImgUrl(url);
       } else {
         console.error('Failed to fetch image');
+        setImgUrl(`${process.env.PUBLIC_URL}/assets/NoIMG.png`);
       }
+      setIsLoading(false);
     }
     fetchImage();
   }, [props.event.image]);
@@ -64,7 +68,7 @@ function EventCard(props) {
     <div>
     <Card style={{ width: '18rem' }}>
       <ToastContainer />
-      <Card.Img variant="top" src={imgUrl} />
+      <Card.Img variant="top" src={isLoading ? `${process.env.PUBLIC_URL}/assets/loading.gif` : imgUrl} />
       <Card.Body >
         <Card.Title>{props.event.name}</Card.Title>
         <Card.Text>

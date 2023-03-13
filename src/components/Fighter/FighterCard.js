@@ -12,7 +12,9 @@ function FighterCard(props) {
   const [imgUrl, setImgUrl] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   async function fetchImage() {
+    setIsLoading(true);
     const response = await ImageAPI.getFighterImage(props);
     if (response.ok) {
       const blob = await response.blob();
@@ -20,11 +22,13 @@ function FighterCard(props) {
       setImgUrl(url);
     } else {
       console.error('Failed to fetch image');
+      setImgUrl(`${process.env.PUBLIC_URL}/assets/NoIMG.png`);
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
-    
+
     fetchImage();
   }, []);
   return (
@@ -32,7 +36,7 @@ function FighterCard(props) {
       <ToastContainer />
       <div className={styles.flipcardinner}>
         <div className={styles.flipcardfront}>
-          <img className={styles.cardavatar} src={imgUrl}
+          <img className={styles.cardavatar} src={isLoading ? `${process.env.PUBLIC_URL}/assets/loading.gif` : imgUrl}
             alt="Avatar" />
         </div>
         <div className={styles.flipcardback}>
@@ -47,30 +51,30 @@ function FighterCard(props) {
           {
             GetRole().roles.includes("ADMIN") ? <Button variant="danger" onClick={() => setIsConfirmed(!isEdit)}>Delete</Button> : null
           }
-           {isConfirmed ?<ReactConfirmAlert 
-    message="Confirm?"
-    buttons={[
-      {
-        label: 'Yes',
-        onClick: async () => {
-          try {
-            const response = await FighterAPI.deleteFighter(props.fighter.id);
-            if (response.status === 200) {
-              props.removeFighter(props.fighter.id);
+          {isConfirmed ? <ReactConfirmAlert
+            message="Confirm?"
+            buttons={[
+              {
+                label: 'Yes',
+                onClick: async () => {
+                  try {
+                    const response = await FighterAPI.deleteFighter(props.fighter.id);
+                    if (response.status === 200) {
+                      props.removeFighter(props.fighter.id);
 
-            }
-          } catch (error) {
-            console.log(error);
-            Notification.Error("Failed to delete event");
-          }
-        }
-      },
-      {
-        label: 'No',
-        onClick: () => setIsConfirmed(false)
-      }
-    ]}
-  /> : null}
+                    }
+                  } catch (error) {
+                    console.log(error);
+                    Notification.Error("Failed to delete event");
+                  }
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => setIsConfirmed(false)
+              }
+            ]}
+          /> : null}
           <Popup
             open={isEdit}
             onOpen={() => setIsEdit(true)}
@@ -78,7 +82,7 @@ function FighterCard(props) {
             modal
             closeOnDocumentClick
           >
-            <span><EditFighter Notification={Notification} setImgUrl={(e) => setImgUrl(e)}setIsEdit={(e) => setIsEdit(e)} fighter={props.fighter} modifyFighter={(e) => props.modifyFighter(e)} />  </span>
+            <span><EditFighter Notification={Notification} setImgUrl={(e) => setImgUrl(e)} setIsEdit={(e) => setIsEdit(e)} fighter={props.fighter} modifyFighter={(e) => props.modifyFighter(e)} />  </span>
           </Popup>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Notification from "../components/Notification";
 
-const BASE_URL = "https://boxvent-backend.herokuapp.com";
+import { BASE_URL } from "./config";
 
 const UserAPI = {
     loginUser:  User =>  axios.post(`${BASE_URL}/login`, User)

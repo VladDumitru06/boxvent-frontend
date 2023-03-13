@@ -3,55 +3,51 @@ import FighterList from '../components/Fighter/FighterList';
 import FighterAPI from "../apis/FighterAPI";
 import { ToastContainer } from "react-bootstrap";
 import Notification from "../components/Notification";
-function FighterPage(){
 
-    const [fighters, setFighters] = useState([]);
-    const [tempFighters, setTempFighters] = useState([]);
-    let fightersExist = false;
-    const fetchFighters = async () => {  
-        FighterAPI.getFighters()
-                    .then(response =>{
-                        if(response)
-                        setFighters(response.data.fighters);
-                    })
-        
-    }
-    if(fighters)
-    {
-        if(!(Object.keys(fighters).length === 0))
-        {
-            fightersExist = true;
-        }
-    }
-    else
-    {
-           fightersExist = false;
-    }
-    useEffect(() => {
-        fetchFighters();
-    }, [tempFighters]);
-  
+function FighterPage() {
+  const [fighters, setFighters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    function ShowFighters(){
-        return(
-            <div>
-                <ToastContainer/>
-            <FighterList fighters={fighters} setFighters={(fighters) =>setTempFighters(fighters)}Notification={Notification}/>
-            </div>
-        )
+  const fetchFighters = async () => {
+    try {
+      const response = await FighterAPI.getFighters();
+      setFighters(response.data.fighters);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    function NoFighters(){
-        return(
-            <h1>No fighters currently registered</h1>
-        )
-    }
-    if(fightersExist){
-        return <ShowFighters/>
-    }
-    else{
-        return <NoFighters/>
-    }
+  };
 
+  useEffect(() => {
+    fetchFighters();
+  }, []);
+
+  if (loading) {
+    return (
+      <div>
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/loadingpage.gif`}
+          alt="Loading"
+        />
+      </div>
+    );
+  }
+
+  if (fighters.length === 0) {
+    return <h1>No fighters currently registered</h1>;
+  }
+
+  return (
+    <div>
+      <ToastContainer />
+      <FighterList
+        fighters={fighters}
+        setFighters={(fighters) => setFighters(fighters)}
+        Notification={Notification}
+      />
+    </div>
+  );
 }
-export default FighterPage;
 
+export default FighterPage;
