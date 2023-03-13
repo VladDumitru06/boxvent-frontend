@@ -26,10 +26,7 @@ function FighterPage() {
   if (loading) {
     return (
       <div>
-        <img
-          src={`${process.env.PUBLIC_URL}/assets/LoadingPage.gif`}
-          alt="Loading"
-        />
+        <img style={{ maxWidth: '100px' }} src={`${process.env.PUBLIC_URL}/assets/LoadingPage.gif`} />
       </div>
     );
   }

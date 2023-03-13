@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import EventAPI from "../apis/EventAPI";
 import EventList from "../components/Event/EventList";
 import Notification from "../components/Notification"
-function EventsPage(props){
+function EventsPage(props) {
 
     const [events, setEvents] = useState([]);
     const [tempEvents, setTempEvents] = useState([]);
@@ -12,81 +12,83 @@ function EventsPage(props){
     const [shouldFocus, setShouldFocus] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     let eventsExist = false;
- 
-    const fetchEvents = async () => {  
+
+    const fetchEvents = async () => {
         EventAPI.getEvents()
-                    .then(response =>{
-                        setEvents(response.data.events);
-                        setIsLoading(false);
-                    }).catch(error => {
-                        console.log(error);
-                        setIsLoading(false);
-                    }).finally(() => {
-                        setIsLoading(false);
-                    })
+            .then(response => {
+                setEvents(response.data.events);
+                setIsLoading(false);
+            }).catch(error => {
+                console.log(error);
+                setIsLoading(false);
+            }).finally(() => {
+                setIsLoading(false);
+            })
     }
-    const filteredEvents = events.filter(event => 
+    const filteredEvents = events.filter(event =>
         event.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     useEffect(() => {
         fetchEvents();
     }, [tempEvents]);
-    if(events)
-    {
-        if(!(Object.keys(events).length === 0))
-        {
+    if (events) {
+        if (!(Object.keys(events).length === 0)) {
             eventsExist = true;
         }
     }
-    else
-    {
-           eventsExist = false;
+    else {
+        eventsExist = false;
     }
-    function ShowEvents(){
-        return(
+    function ShowEvents() {
+        return (
             <>
-            <ToastContainer/>
-            <Form>
-            <Container>
-      <Row className="justify-content-md-center">
-  
-        <Col md="auto"> <Form.Group  controlId="formSearch">
-                <Form.Control
-                autoFocus={shouldFocus}
-                                    type="text" 
-                                    placeholder="Search for events" 
-                                    value={searchTerm} 
-                                    onChange={e => {setSearchTerm(e.target.value);
-                                    setShouldFocus(true);
-                                    if (e.target.value === '') {
-                                        setShouldFocus(false);
-                                    }
-                                    } } />
-            </Form.Group></Col>
+                <ToastContainer />
+                <Form>
+                    <Container>
+                        <Row className="justify-content-md-center">
 
-      </Row>
+                            <Col md="auto"> <Form.Group controlId="formSearch">
+                                <Form.Control
+                                    autoFocus={shouldFocus}
+                                    type="text"
+                                    placeholder="Search for events"
+                                    value={searchTerm}
+                                    onChange={e => {
+                                        setSearchTerm(e.target.value);
+                                        setShouldFocus(true);
+                                        if (e.target.value === '') {
+                                            setShouldFocus(false);
+                                        }
+                                    }} />
+                            </Form.Group></Col>
 
-    </Container>
-           
+                        </Row>
 
-            <EventList events={filteredEvents} setEvents={(events) =>setTempEvents(events)}Notification={props.Notification}/>
-            </Form>
+                    </Container>
+
+
+                    <EventList events={filteredEvents} setEvents={(events) => setTempEvents(events)} Notification={props.Notification} />
+                </Form>
             </>
         )
     }
-    function NoEvents(){
-        return(
+    function NoEvents() {
+        return (
             <div>
-            {isLoading ? `${process.env.PUBLIC_URL}/assets/LoadingPage.gif}` : <h1>No events registered</h1>}
+                {isLoading ? (
+                    <img style={{ maxWidth: '100px' }} src={`${process.env.PUBLIC_URL}/assets/LoadingPage.gif`} />
+                ) : (
+                    <h1>No events registered</h1>
+                )}
             </div>
         )
     }
-    if(events.length > 0){
-        return <ShowEvents/>
+    if (events.length > 0) {
+        return <ShowEvents />
     }
-    else{
-        return <NoEvents/>
+    else {
+        return <NoEvents />
     }
 
 }
