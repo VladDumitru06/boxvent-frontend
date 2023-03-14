@@ -120,7 +120,7 @@ function CreateEvent() {
             <Form id="formId" onSubmit={handleSubmit}>
         <Form.Label>Image</Form.Label>
         <br></br>
-            <input required type="file" accept="image/jpeg,image/png" onChange={(e) => handleFileChange(e)} />
+            <input required type="file" accept="image/png" onChange={(e) => handleFileChange(e)} />
             {imagePreview && <img src={imagePreview} alt="event thumbnail" width="200"/>}
                 <ToastContainer />
                 <Form.Group controlId="formBasicText">
