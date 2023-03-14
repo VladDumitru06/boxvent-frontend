@@ -53,7 +53,7 @@ function ChatHandler(props) {
         if (messageExists) {
             console.log("Message already exists");
         } else {
-            setMessagesReceived(messagesReceived => [...messagesReceived, message]);
+            setMessagesReceived(messagesReceived => [message, ...messagesReceived]);
         }
     };
 
