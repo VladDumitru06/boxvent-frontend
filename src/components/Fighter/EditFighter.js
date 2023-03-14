@@ -20,12 +20,14 @@ function EditFighter(props){
 
     useEffect(() => {
         async function fetchImage() {
+            setImgUrl(`${process.env.PUBLIC_URL}/assets/Loading.png`);
             const response = await ImageAPI.getFighterImage(props);
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 setImgUrl(url);
             } else {
+                setImgUrl(`${process.env.PUBLIC_URL}/assets/NoImg.png`);
                 console.error('Failed to fetch image');
             }
         }
