@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 const SendMessagePlaceholder = (props) => {
   const [message, setMessage] = useState('');
@@ -18,14 +19,14 @@ const SendMessagePlaceholder = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    onMessageSend();
   }
 
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor='message'>Message:</label>
-      <input id='message' type='text' onChange={(event) => setMessage(event.target.value)} value={message}></input>
-      <br />
-      <button onClick={onMessageSend}>Send</button>
+      <label htmlFor='message' style={{ marginRight :"10px", marginTop:"5px"}}>Message:</label>
+      <input  id='message' type='text' onChange={(event) => setMessage(event.target.value)} value={message}></input>
+      <Button style={{ marginLeft :"10px" ,marginBottom : "3px"}} size="sm" variant="secondary"onClick={onMessageSend}>Send</Button>
     </form>
   );
 }
