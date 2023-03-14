@@ -6,9 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import GetRole from './components/GetRole';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+GetRole();
 root.render(
   <React.StrictMode>
-    {GetRole()}
     <App />
   </React.StrictMode>
 );
