@@ -24,38 +24,6 @@ function EventsPage(props) {
             }).finally(() => {
                 setIsLoading(false);
             })
-            const events = [
-                {
-                  id: 1,
-                  name: "Concert",
-                  city: "New York",
-                  sold_tickets: 1000,
-                  available_tickets: 500,
-                  ticketPrice: 50.0,
-                  date: new Date(2023, 3, 14, 20, 0),
-                  description: "A great concert in the heart of New York City"
-                },
-                {
-                  id: 2,
-                  name: "Comedy Show",
-                  city: "Los Angeles",
-                  sold_tickets: 500,
-                  available_tickets: 1000,
-                  ticketPrice: 25.0,
-                  date: new Date(2023, 3, 21, 19, 30),
-                  description: "A hilarious night of stand-up comedy in Los Angeles"
-                },
-                {
-                  id: 3,
-                  name: "Theater Production",
-                  city: "Chicago",
-                  sold_tickets: 750,
-                  available_tickets: 250,
-                  ticketPrice: 75.0,
-                  date: new Date(2023, 4, 1, 14, 0),
-                  description: "An award-winning theater production in the Windy City"
-                }
-              ];
               
               // Convert dates to string
               events.forEach(event => {
